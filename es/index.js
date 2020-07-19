@@ -175,8 +175,6 @@ var ChartComponent = function (_React$Component) {
   };
 
   ChartComponent.prototype.updateChart = function updateChart() {
-    var _this3 = this;
-
     var options = this.props.options;
 
 
@@ -198,29 +196,7 @@ var ChartComponent = function (_React$Component) {
 
     // We can safely replace the dataset array, as long as we retain the _meta property
     // on each dataset.
-    this.chartInstance.config.data.datasets = nextDatasets.map(function (next) {
-      var current = currentDatasetsIndexed[_this3.props.datasetKeyProvider(next)];
-
-      if (current && current.type === next.type && next.data) {
-        // Be robust to no data. Relevant for other update mechanisms as in chartjs-plugin-streaming.
-        // The data array must be edited in place. As chart.js adds listeners to it.
-        current.data.splice(next.data.length);
-        next.data.forEach(function (point, pid) {
-          current.data[pid] = next.data[pid];
-        });
-
-        var _data = next.data,
-            otherProps = _objectWithoutProperties(next, ['data']);
-        // Merge properties. Notice a weakness here. If a property is removed
-        // from next, it will be retained by current and never disappears.
-        // Workaround is to set value to null or undefined in next.
-
-
-        return _extends({}, current, otherProps);
-      } else {
-        return next;
-      }
-    });
+    this.chartInstance.config.data.datasets = nextDatasets;
 
     var datasets = data.datasets,
         rest = _objectWithoutProperties(data, ['datasets']);
@@ -337,11 +313,11 @@ export var Doughnut = function (_React$Component2) {
   }
 
   Doughnut.prototype.render = function render() {
-    var _this5 = this;
+    var _this4 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref) {
-        return _this5.chartInstance = _ref && _ref.chartInstance;
+        return _this4.chartInstance = _ref && _ref.chartInstance;
       },
       type: 'doughnut'
     }));
@@ -360,11 +336,11 @@ export var Pie = function (_React$Component3) {
   }
 
   Pie.prototype.render = function render() {
-    var _this7 = this;
+    var _this6 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref2) {
-        return _this7.chartInstance = _ref2 && _ref2.chartInstance;
+        return _this6.chartInstance = _ref2 && _ref2.chartInstance;
       },
       type: 'pie'
     }));
@@ -383,11 +359,11 @@ export var Line = function (_React$Component4) {
   }
 
   Line.prototype.render = function render() {
-    var _this9 = this;
+    var _this8 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref3) {
-        return _this9.chartInstance = _ref3 && _ref3.chartInstance;
+        return _this8.chartInstance = _ref3 && _ref3.chartInstance;
       },
       type: 'line'
     }));
@@ -406,11 +382,11 @@ export var Bar = function (_React$Component5) {
   }
 
   Bar.prototype.render = function render() {
-    var _this11 = this;
+    var _this10 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref4) {
-        return _this11.chartInstance = _ref4 && _ref4.chartInstance;
+        return _this10.chartInstance = _ref4 && _ref4.chartInstance;
       },
       type: 'bar'
     }));
@@ -429,11 +405,11 @@ export var HorizontalBar = function (_React$Component6) {
   }
 
   HorizontalBar.prototype.render = function render() {
-    var _this13 = this;
+    var _this12 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref5) {
-        return _this13.chartInstance = _ref5 && _ref5.chartInstance;
+        return _this12.chartInstance = _ref5 && _ref5.chartInstance;
       },
       type: 'horizontalBar'
     }));
@@ -452,11 +428,11 @@ export var Radar = function (_React$Component7) {
   }
 
   Radar.prototype.render = function render() {
-    var _this15 = this;
+    var _this14 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref6) {
-        return _this15.chartInstance = _ref6 && _ref6.chartInstance;
+        return _this14.chartInstance = _ref6 && _ref6.chartInstance;
       },
       type: 'radar'
     }));
@@ -475,11 +451,11 @@ export var Polar = function (_React$Component8) {
   }
 
   Polar.prototype.render = function render() {
-    var _this17 = this;
+    var _this16 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref7) {
-        return _this17.chartInstance = _ref7 && _ref7.chartInstance;
+        return _this16.chartInstance = _ref7 && _ref7.chartInstance;
       },
       type: 'polarArea'
     }));
@@ -498,11 +474,11 @@ export var Bubble = function (_React$Component9) {
   }
 
   Bubble.prototype.render = function render() {
-    var _this19 = this;
+    var _this18 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref8) {
-        return _this19.chartInstance = _ref8 && _ref8.chartInstance;
+        return _this18.chartInstance = _ref8 && _ref8.chartInstance;
       },
       type: 'bubble'
     }));
@@ -521,11 +497,11 @@ export var Scatter = function (_React$Component10) {
   }
 
   Scatter.prototype.render = function render() {
-    var _this21 = this;
+    var _this20 = this;
 
     return React.createElement(ChartComponent, _extends({}, this.props, {
       ref: function ref(_ref9) {
-        return _this21.chartInstance = _ref9 && _ref9.chartInstance;
+        return _this20.chartInstance = _ref9 && _ref9.chartInstance;
       },
       type: 'scatter'
     }));

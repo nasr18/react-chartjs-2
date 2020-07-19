@@ -203,29 +203,7 @@ class ChartComponent extends React.Component {
 
     // We can safely replace the dataset array, as long as we retain the _meta property
     // on each dataset.
-    this.chartInstance.config.data.datasets = nextDatasets.map(next => {
-      const current =
-        currentDatasetsIndexed[this.props.datasetKeyProvider(next)];
-
-      if (current && current.type === next.type && next.data) {
-        // Be robust to no data. Relevant for other update mechanisms as in chartjs-plugin-streaming.
-        // The data array must be edited in place. As chart.js adds listeners to it.
-        current.data.splice(next.data.length);
-        next.data.forEach((point, pid) => {
-          current.data[pid] = next.data[pid];
-        });
-        const { data, ...otherProps } = next;
-        // Merge properties. Notice a weakness here. If a property is removed
-        // from next, it will be retained by current and never disappears.
-        // Workaround is to set value to null or undefined in next.
-        return {
-          ...current,
-          ...otherProps
-        };
-      } else {
-        return next;
-      }
-    });
+    this.chartInstance.config.data.datasets = nextDatasets;
 
     const { datasets, ...rest } = data;
 
